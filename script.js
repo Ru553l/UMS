@@ -1,5 +1,6 @@
    var User = Backbone.Model.extend({
         url: 'https://reqres.in/api/users',
+        idAttribute: 'id',
         defaults:{
             id: null,
             first_name: 'John',
@@ -118,29 +119,36 @@
         },
 
         addModel: function(){
-
-         var mod = new User({id: col.models.length+1});
-
-         col.models.push(mod);
+         var j;
+         for (i = 1; i < col.models.length+1; i++) {
+               if(col.get({id: i})==undefined){
+                  j=i;
+               }
+            };  
+         var mod = new User({id: j});
+         mod.save();
+         col.add(mod);
          alert('New user added to the bottom of the page');
          this.render();
         },
         deleteModel: function(){
-         var modl = col.models[($('#editId').val()) -1];
+         var modl = col.get({id: $('#editId').val()});
+         modl.set({first_name: $("#editFn").val()});
+         modl.set({last_name: $("#editLn").val()});
+
          col.remove(modl);
          $('.editForm').hide();
          $('.confirm').hide();
          $('#addUserButton').show();
          this.render();
-         
         },
          saveUser: function(){
-         var modl = col.models[($('#editId').val()) -1];
+         var modl = col.get({id: $('#editId').val()});
 
          if($("#editFn").val().trim().length > 0 && $("#editLn").val().trim().length > 0 ){
          modl.set({first_name: $("#editFn").val()});
          modl.set({last_name: $("#editLn").val()});
-         col.models[($('#editId').val()) -1] = modl;
+         col.set(modl);
          modl.save();
          $('.editForm').hide();
          $('#addUserButton').show();
