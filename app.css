@@ -16,7 +16,8 @@ li{
 	border-left: 3px solid;
 	border-right: 3px solid;
 	list-style-type: none;
-	width: 300px;
+	width: 290px;
+	display: inline-block;
 }
 h1{
 	text-align: center;
@@ -43,4 +44,7 @@ input{
 p{
 	text-align: left;
 	margin-left: 50px;
+}
+#users{
+	width: 900px;
 }

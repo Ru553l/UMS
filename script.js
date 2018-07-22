@@ -50,10 +50,10 @@
         editUser: function(){
           $('li').removeClass("editting");
           this.$el.addClass("editting");
-          $('.editForm').show();
-          $('#addUserButton').hide();
+          $('.editForm').show(1000);
+          $('#addUserButton').hide(1000);
           if(col.models.length<2){
-            $('#confirmButton').hide();
+            $('#confirmButton').hide(1000);
          }
          document.getElementById("eid").innerHTML=('ID: '+this.model.attributes.id);
          $("#editId").val(this.model.attributes.id);
@@ -137,9 +137,9 @@
          modl.set({last_name: $("#editLn").val()});
 
          col.remove(modl);
-         $('.editForm').hide();
-         $('.confirm').hide();
-         $('#addUserButton').show();
+         $('.editForm').hide(1000);
+         $('.confirm').hide(1000);
+         $('#addUserButton').show(1000);
          this.render();
         },
          saveUser: function(){
@@ -148,22 +148,22 @@
          if($("#editFn").val().trim().length > 0 && $("#editLn").val().trim().length > 0 ){
          modl.set({first_name: $("#editFn").val()});
          modl.set({last_name: $("#editLn").val()});
-         col.set(modl);
+         col.set(modl,{remove: false});
          modl.save();
-         $('.editForm').hide();
-         $('#addUserButton').show();
+         $('.editForm').hide(1000);
+         $('#addUserButton').show(1000);
          this.render();
          }else{
             alert('User must have first and last name property');
          }
         },
         confirm: function(){
-         $('.editForm').hide();
-         $('.confirm').show();
+         $('.editForm').hide(1000);
+         $('.confirm').show(1000);
         },
         redo: function(){
-         $('.editForm').show();
-         $('.confirm').hide();
+         $('.editForm').show(1000);
+         $('.confirm').hide(1000);
         }    
     });
 
